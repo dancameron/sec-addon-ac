@@ -105,20 +105,10 @@ get_header(); ?>
 				$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 				$args=array(
 					'post_type' => gb_get_deal_post_type(),
+                         SeC_Advanced_Coupons::TAX => SeC_Advanced_Coupons::get_term_slug(),
 					'post_status' => 'publish',
 					'paged' => $paged,
 					'posts_per_page' => 100,
-					'meta_query' => array(
-						array(
-							'key' => '_expiration_date',
-							'value' => array(0, current_time('timestamp')),
-							'compare' => 'NOT BETWEEN'
-						),
-                              array(
-                                   'key' => 'mw-deal-type',
-                                   'value' => 'coupon'
-                              )),
-
 				);
 				$deal_query = new WP_Query($args);
 				?>
@@ -130,7 +120,16 @@ get_header(); ?>
 				<?php endif; ?>
                 
 				<?php $count; while ( $deal_query->have_posts() ) : $deal_query->the_post(); $count++; $zebra = ($count % 2) ? ' odd' : ' even'; ?>
-                
+                         <?php 
+                              $template = locate_template(array(
+                                        'inc/coupon-item.php'
+                                   ), FALSE);
+                              if ( $template == FALSE ) {
+                                   $template = MW_ADVANCED_COUPONS_PATH . '/templates/inc/coupon-item.php';
+                              }
+                              include($template);
+                              ?>
+
 					<?php get_template_part( 'inc/coupon-item', 'inc/coupon-item' ); ?>
                 
 				<?php endwhile; ?>

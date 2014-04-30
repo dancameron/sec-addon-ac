@@ -60,6 +60,21 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 	}
 
 	public static function override_template( $template ) {
+		if ( is_single() && Group_Buying_Deal::is_deal_query() ) {
+			if ( self::is_coupon() ) { // override the single template for coupons
+				$template = self::locate_template( array(
+						'offers/single-coupon.php',
+						'offers/coupon.php',
+						'coupon.php',
+						'deals/single-coupon.php',
+						'deals/coupon.php',
+					), FALSE );
+				if ( $template == FALSE ) {
+					// method of using default templates from the plugin
+					$template = MW_ADVANCED_COUPONS_PATH . '/templates/offers/coupon.php';
+				}
+			}
+		}
 		if ( self::is_coupon_query_page() ) {
 			$template = self::locate_template( array(
 					'coupons/index.php',
@@ -161,7 +176,11 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 		return get_term_link( self::TERM_SLUG, self::TAX );
 	}
 
-	public static function is_coupon( $post_id ) {
+	public static function is_coupon( $post_id = 0 ) {
+		if ( !$post_id ) {
+			global $post;
+			$post_id = $post->ID;
+		}
 		$term = array_pop( wp_get_object_terms( $post_id, self::TAX ) );
 		if ( !is_object( $term ) ) {
 			return FALSE;
@@ -169,7 +188,11 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 		return $term->slug == self::TERM_SLUG;
 	}
 
-	public static function make_offer_coupon( $post_id ) {
+	public static function make_offer_coupon( $post_id = 0 ) {
+		if ( !$post_id ) {
+			global $post;
+			$post_id = $post->ID;
+		}
 		wp_set_object_terms( $post_id, self::get_term_slug(), self::TAX );
 	}
 
