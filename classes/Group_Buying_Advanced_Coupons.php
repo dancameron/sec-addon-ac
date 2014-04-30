@@ -14,6 +14,9 @@ class Group_Buying_Advanced_Coupons extends Group_Buying_Controller {
 		//add and save metabox hooks
 		add_action( 'add_meta_boxes', array( get_class(), 'mw_add_deal_option_metabox' ) );
 		add_action( 'save_post', array( get_class(), 'mw_save_deal_option_metabox' ), 10, 2 );
+
+		// admin css
+		add_action( 'admin_head', array( get_class(), 'admin_header_css' ) );
 	}
 
 	//add the metabox
@@ -49,6 +52,10 @@ class Group_Buying_Advanced_Coupons extends Group_Buying_Controller {
 		if ( isset( $_POST['mw-deal-type'] ) ) {
 			update_post_meta( $post_id, 'mw-deal-type', $_POST['mw-deal-type'] );
 		}
+	}
+
+	public static function admin_header_css() {
+		echo '<style>#adminmenu #toplevel_page_gbs-addon-advanced-coupons-includes-mw-coupon-options-page div.wp-menu-image:before { content: "\f132"; }</style>';
 	}
 
 }
