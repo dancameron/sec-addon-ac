@@ -35,6 +35,8 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 		//Add Item Type column to deal page in admin
 		add_filter( 'manage_edit-'.Group_Buying_Deal::POST_TYPE.'_columns', array( get_class(), 'new_column' ) );
 		add_filter( 'manage_'.Group_Buying_Deal::POST_TYPE.'_posts_custom_column', array( get_class(), 'new_column_info' ), 10, 2 );
+
+		self::register_template_sidebars();
 	}
 
 	public static function register_coupon_taxonomy() {
@@ -210,6 +212,30 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 			);
 			return self::TERM_SLUG;
 		}
+	}
+
+	public static function register_template_sidebars() {
+		//Create Coupon widget area
+		register_sidebar( array(
+				'name'         => __( 'Coupons Sidebar' ),
+				'id'           => 'coupons-sidebar',
+				'description'  => __( 'Widgets in this area will be shown on the coupons page.' ),
+				'before_title' => '<h2 class="widget-title gb_ff">',
+				'after_title'  => '</h2>',
+				'before_widget' => '<div id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</div>',
+			) );
+		register_sidebar( array(
+				'name'         => __( 'Coupon Sidebar' ),
+				'id'           => 'coupon-sidebar',
+				'description'  => __( 'Widgets in this area will be shown on the coupon page.' ),
+				'before_title' => '<h2 class="widget-title gb_ff">',
+				'after_title'  => '</h2>',
+				'before_widget' => '<div id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</div>',
+
+			) );
+	
 	}
 
 }
