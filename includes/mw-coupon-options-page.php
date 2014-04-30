@@ -12,32 +12,28 @@
 
 	<div class="mw-options-row first">
 		<label for="sidebar_option">
-			<?php if ( $sidebar_option == "yes" ) { $sidebar_option_checked = 'checked="checked"'; } ?>
-			<input type="checkbox" id="sidebar_option" name="sidebar_option" value="yes" <?php echo $sidebar_option_checked; ?> />
+			<input type="checkbox" id="sidebar_option" name="sidebar_option" value="yes" <?php checked( 'yes', $sidebar_option ) ?>  />
 			<span>Check to show sidebar on Coupon Page</span>
 		</label>
 	</div><!-- /mw-options-row -->
 
 	<div class="mw-options-row">
 		<label for="merchant_name">
-			<?php if ( $merchant_name == "yes" ) { $merchant_name_checked = 'checked="checked"'; } ?>
-			<input type="checkbox" id="merchant_name" name="merchant_name" value="yes" <?php echo $merchant_name_checked; ?> />
+			<input type="checkbox" id="merchant_name" name="merchant_name" value="yes" <?php checked( 'yes', $merchant_name ) ?> />
 			<span>Check to show Merchant Name on each coupon item on main coupon page</span>
 		</label>
 	</div><!-- /mw-options-row -->
 
 	<div class="mw-options-row">
 		<label for="coupon_savings">
-			<?php if ( $coupon_savings == "yes" ) { $coupon_savings_checked = 'checked="checked"'; } ?>
-			<input type="checkbox" id="coupon_savings" name="coupon_savings" value="yes" <?php echo $coupon_savings_checked; ?> />
+			<input type="checkbox" id="coupon_savings" name="coupon_savings" value="yes" <?php checked( 'yes', $coupon_savings ) ?> />
 			<span>Check to show Coupon Savings on each coupon item on main coupon page</span>
 		</label>
 	</div><!-- /mw-options-row -->
 
 	<div class="mw-options-row">
 		<label for="coupon_countdown">
-			<?php if ( $coupon_countdown == "yes" ) { $coupon_countdown_checked = 'checked="checked"'; } ?>
-			<input type="checkbox" id="coupon_countdown" name="coupon_countdown" value="yes" <?php echo $coupon_countdown_checked; ?> />
+			<input type="checkbox" id="coupon_countdown" name="coupon_countdown" value="yes" <?php checked( 'yes', $coupon_countdown ) ?> />
 			<span>Check to show Countdown on each coupon item on main coupon page</span>
 		</label>
 	</div><!-- /mw-options-row -->
