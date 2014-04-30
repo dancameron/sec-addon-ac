@@ -9,13 +9,13 @@ Plugin Author URI: http://www.whiteleydesigns.com
 Text Domain: group-buying
 */
 
-
+define ('MW_ADVANCED_COUPONS_PATH', WP_PLUGIN_DIR . '/' . basename( dirname( __FILE__ ) ) );
 
 // Load after all other plugins since we need to be compatible with groupbuyingsite
 add_action( 'plugins_loaded', 'mw_advanced_coupons' );
 function mw_advanced_coupons() {
 	if ( class_exists( 'Group_Buying_Controller' ) ) {
-		require_once 'mw-advanced-coupons.model.class.php';
-		Group_Buying_Advanced_Coupons_Addon::init();
+		require_once 'classes/Group_Buying_Advanced_Coupons_Addon.php';
+		add_filter( 'gb_addons', array( 'Group_Buying_Advanced_Coupons_Addon', 'gb_addon' ), 10, 1 );
 	}
 }
