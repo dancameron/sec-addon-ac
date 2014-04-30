@@ -5,7 +5,6 @@ define( 'WD_GBS_PATH', WP_PLUGIN_DIR . '/' . basename( dirname( __FILE__ ) ) );
 
 //Required files
 require_once WD_GBS_PATH.'/includes/mw-coupon-options-page.php';
-require_once WD_GBS_PATH.'/includes/mw-admin-css.php';
 
 // Create Coupon/Deal Selection box on GBS Deal Entry Page
 class Group_Buying_Advanced_Coupons extends Group_Buying_Controller {
