@@ -1,13 +1,7 @@
 <?php
 
-//Path to plugin
-define( 'WD_GBS_PATH', WP_PLUGIN_DIR . '/' . basename( dirname( __FILE__ ) ) );
-
-//Required files
-require_once WD_GBS_PATH.'/includes/mw-coupon-options-page.php';
-
 // Create Coupon/Deal Selection box on GBS Deal Entry Page
-class Group_Buying_Advanced_Coupons extends Group_Buying_Controller {
+class SeC_Advanced_Coupons extends Group_Buying_Controller {
 
 	public static function init() {
 		//add and save metabox hooks
@@ -49,8 +43,8 @@ class Group_Buying_Advanced_Coupons extends Group_Buying_Controller {
 	 * @return  
 	 */
 	public static function register_widgets(){
-		register_widget("GroupBuying_DealsOnlyWidget");
-		register_widget("GroupBuying_CouponWidget");
+		register_widget("SeC_DealsOnlyWidget");
+		register_widget("SeC_CouponWidget");
 	}
 
 }

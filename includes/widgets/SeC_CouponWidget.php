@@ -1,16 +1,16 @@
 <?php
 
 //Create Coupon Widget
-class GroupBuying_CouponWidget extends WP_Widget {
+class SeC_CouponWidget extends WP_Widget {
 	/**
 	 * Constructor
 	 *
 	 * @return void
 	 * @author Dan Cameron
 	 */
-	function GroupBuying_CouponWidget() {
+	function SeC_CouponWidget() {
 		$widget_ops = array( 'description' => gb__( 'Displays a list of current coupons available.' ) );
-		parent::WP_Widget( false, $name = gb__( 'GBS :: Current Coupons' ), $widget_ops );
+		parent::WP_Widget( false, $name = gb__( 'Smart eCart :: Current Coupons' ), $widget_ops );
 	}
 
 	function widget( $args, $instance ) {

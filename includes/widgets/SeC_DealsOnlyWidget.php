@@ -1,15 +1,15 @@
 <?php
 //Create sidebar widget that excludes coupons
-class GroupBuying_DealsOnlyWidget extends WP_Widget {
+class SeC_DealsOnlyWidget extends WP_Widget {
 	/**
 	 * Constructor
 	 *
 	 * @return void
 	 * @author Dan Cameron
 	 */
-	function GroupBuying_DealsOnlyWidget() {
+	function SeC_DealsOnlyWidget() {
 		$widget_ops = array( 'description' => gb__( 'Lists current deals excluding coupons.' ) );
-		parent::WP_Widget( false, $name = gb__( 'GBS :: Deals Only (no coupons)' ), $widget_ops );
+		parent::WP_Widget( false, $name = gb__( 'Smart eCart :: Deals Only (no coupons)' ), $widget_ops );
 	}
 
 	function widget( $args, $instance ) {
@@ -93,4 +93,3 @@ class GroupBuying_DealsOnlyWidget extends WP_Widget {
         <?php
 	}
 }
-add_action( 'widgets_init', create_function( '', 'return register_widget("GroupBuying_DealsOnlyWidget");' ) );
