@@ -14,6 +14,11 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 		// widgets
 		add_action( 'widgets_init', array( get_class(), 'register_widgets' ) );
 
+		// options page
+		add_action( 'admin_menu', array( get_class(), 'mw_options_menu' ) );
+		add_action( 'admin_init', array( get_class(), 'mw_register_settings' ) );
+
+
 	}
 
 	//add the metabox
@@ -23,7 +28,7 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 
 	//the metabox
 	function mw_deal_option_metabox() {
-		include MW_ADVANCED_COUPONS_PATH . '/offer-metabox.php';
+		include MW_ADVANCED_COUPONS_PATH . '/views/offer-metabox.php';
 	}
 
 	//save the entry when post is saved or updated
@@ -45,6 +50,23 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 	public static function register_widgets(){
 		register_widget("SeC_DealsOnlyWidget");
 		register_widget("SeC_CouponWidget");
+	}
+
+	// options page
+	public static function mw_options_menu() {
+		add_menu_page( 'mw-options-page', 'Coupon Settings', 'administrator', __FILE__, array( get_class(), 'mw_settings_page' ) );
+	}
+
+	//Register the different settings on the option page
+	public static function mw_register_settings() {
+		register_setting( 'mw_settings_group', 'sidebar_option' );
+		register_setting( 'mw_settings_group', 'merchant_name' );
+		register_setting( 'mw_settings_group', 'coupon_savings' );
+		register_setting( 'mw_settings_group', 'coupon_countdown' );
+	}
+
+	public static function mw_settings_page() {
+		include MW_ADVANCED_COUPONS_PATH . '/views/options-page.php';
 	}
 
 }

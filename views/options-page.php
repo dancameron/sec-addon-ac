@@ -5,10 +5,10 @@
 	<?php settings_fields( 'mw_settings_group' ); ?>
 
 	<?php
-		$sidebar_option = get_option( 'sidebar_option' );
-		$merchant_name = get_option( 'merchant_name' );
-		$coupon_savings = get_option( 'coupon_savings' );
-		$coupon_countdown = get_option( 'coupon_countdown' ); ?>
+	$sidebar_option = get_option( 'sidebar_option' );
+	$merchant_name = get_option( 'merchant_name' );
+	$coupon_savings = get_option( 'coupon_savings' );
+	$coupon_countdown = get_option( 'coupon_countdown' ); ?>
 
 	<div class="mw-options-row first">
 		<label for="sidebar_option">
