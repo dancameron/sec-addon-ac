@@ -39,7 +39,7 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 	}
 
 	public static function admin_header_css() {
-		echo '<style>#adminmenu #toplevel_page_gbs-addon-advanced-coupons-includes-mw-coupon-options-page div.wp-menu-image:before { content: "\f132"; }</style>';
+		echo '<style>#toplevel_page_sec-addon-advanced-coupons-classes-SeC_Advanced_Coupons div.wp-menu-image:before { content: "\f132"; }</style>';
 	}
 
 	/**
