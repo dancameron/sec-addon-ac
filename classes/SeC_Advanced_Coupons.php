@@ -19,6 +19,9 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 		add_action( 'admin_init', array( get_class(), 'mw_register_settings' ) );
 
 
+		//Add Item Type column to deal page in admin
+		add_filter( 'manage_edit-'.Group_Buying_Deal::POST_TYPE.'_columns', array( get_class(), 'new_column' ) );
+		add_filter( 'manage_'.Group_Buying_Deal::POST_TYPE.'_posts_custom_column', array( get_class(), 'new_column_info' ), 10, 2 );
 	}
 
 	//add the metabox
@@ -69,6 +72,25 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 		include MW_ADVANCED_COUPONS_PATH . '/views/options-page.php';
 	}
 
+	// offer columns
+	function new_column( $columns ) {
+		$columns['itemtype'] = 'Item Type';
+		return $columns;
+	}
+
+	function new_column_info( $columns, $id ) {
+		switch ( $columns ) {
+			case 'itemtype':
+				$hb_deal_type = get_post_meta( $id, 'mw-deal-type', true );
+				echo $hb_deal_type;
+				break;
+
+			default:
+				// code...
+				break;
+		}
+	}
+
 }
 
 //Set deal type on deal page query
@@ -88,30 +110,8 @@ function only_show_deal_type( $query ) {
 	}
 }
 
-//Add Item Type column to deal page in admin
-add_filter( 'manage_edit-'.Group_Buying_Deal::POST_TYPE.'_columns', 'new_column' );
-add_filter( 'manage_'.Group_Buying_Deal::POST_TYPE.'_posts_custom_column', 'new_column_info', 10, 2 );
 
-function new_column( $columns ) {
-	$columns['itemtype'] = 'Item Type';
-	return $columns;
-}
 
-function new_column_info( $columns, $id ) {
-	global $post;
-	$hb_deal_type = get_post_meta( $post->ID, 'mw-deal-type', true );
-
-	switch ( $columns ) {
-
-	case 'itemtype':
-		echo $hb_deal_type;
-		break;
-
-	default:
-		// code...
-		break;
-	}
-}
 
 //Create Coupon widget area
 register_sidebar( array(
