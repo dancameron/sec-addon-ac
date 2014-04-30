@@ -109,26 +109,3 @@ function only_show_deal_type( $query ) {
 		$query->set( 'meta_query', $meta_query );
 	}
 }
-
-
-
-
-//Create Coupon widget area
-register_sidebar( array(
-		'name'         => __( 'Coupons Sidebar' ),
-		'id'           => 'coupons-sidebar',
-		'description'  => __( 'Widgets in this area will be shown on the coupons page.' ),
-		'before_title' => '<h2 class="widget-title gb_ff">',
-		'after_title'  => '</h2>',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-	) );
-register_sidebar( array(
-		'name'         => __( 'Coupon Sidebar' ),
-		'id'           => 'coupon-sidebar',
-		'description'  => __( 'Widgets in this area will be shown on the coupon page.' ),
-		'before_title' => '<h2 class="widget-title gb_ff">',
-		'after_title'  => '</h2>',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-	) );
