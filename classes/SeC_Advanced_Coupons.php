@@ -8,6 +8,9 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 		add_action( 'add_meta_boxes', array( get_class(), 'mw_add_deal_option_metabox' ) );
 		add_action( 'save_post', array( get_class(), 'mw_save_deal_option_metabox' ), 10, 2 );
 
+		// filter out coupons from main loops
+		add_action( 'pre_get_posts', array( get_class(), 'only_show_deal_type' ) );
+
 		// admin css
 		add_action( 'admin_head', array( get_class(), 'admin_header_css' ) );
 
@@ -25,19 +28,34 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 	}
 
 	//add the metabox
-	function mw_add_deal_option_metabox() {
+	public static function mw_add_deal_option_metabox() {
 		add_meta_box( 'deal-option', 'Choose Type', array( get_class(), 'mw_deal_option_metabox' ), Group_Buying_Deal::POST_TYPE, 'side', 'high' );
 	}
 
 	//the metabox
-	function mw_deal_option_metabox() {
+	public static function mw_deal_option_metabox() {
 		include MW_ADVANCED_COUPONS_PATH . '/views/offer-metabox.php';
 	}
 
 	//save the entry when post is saved or updated
-	function mw_save_deal_option_metabox( $post_id ) {
+	public static function mw_save_deal_option_metabox( $post_id ) {
 		if ( isset( $_POST['mw-deal-type'] ) ) {
 			update_post_meta( $post_id, 'mw-deal-type', $_POST['mw-deal-type'] );
+		}
+	}
+
+	public static function only_show_deal_type( $query ) {
+		if ( !is_admin() &&
+			$query->is_post_type_archive( gb_get_deal_post_type() ) &&
+			$query->is_main_query() ) {
+			$meta_query = array(
+				array(
+					'key' => 'mw-deal-type',
+					'value' => 'coupon',
+					'compare' => '!='
+				),
+			);
+			$query->set( 'meta_query', $meta_query );
 		}
 	}
 
@@ -91,21 +109,4 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 		}
 	}
 
-}
-
-//Set deal type on deal page query
-add_action( 'pre_get_posts', 'only_show_deal_type' );
-function only_show_deal_type( $query ) {
-	if ( !is_admin() &&
-		$query->is_post_type_archive( gb_get_deal_post_type() ) &&
-		$query->is_main_query() ) {
-		$meta_query = array(
-			array(
-				'key' => 'mw-deal-type',
-				'value' => 'coupon',
-				'compare' => '!='
-			),
-		);
-		$query->set( 'meta_query', $meta_query );
-	}
 }
