@@ -36,11 +36,15 @@ class SeC_DealsOnlyWidget extends WP_Widget {
 					'value' => array( 0, current_time( 'timestamp' ) ),
 					'compare' => 'NOT BETWEEN'
 				),
+			),
+			'tax_query' => array(
 				array(
-					'key' => 'mw-deal-type',
-					'value' => 'coupon',
-					'compare' => '!=',
-				) ),
+					'taxonomy' => SeC_Advanced_Coupons::TAX,
+					'field' => 'slug',
+					'terms' => SeC_Advanced_Coupons::get_term_slug(),
+					'operator' => 'NOT IN'
+				)	
+			),
 			'posts_per_page' => $deals,
 			'post__not_in' => array( $post_not_in )
 		);
