@@ -129,8 +129,6 @@ get_header(); ?>
                               }
                               include($template);
                               ?>
-
-					<?php get_template_part( 'inc/coupon-item', 'inc/coupon-item' ); ?>
                 
 				<?php endwhile; ?>
                 
