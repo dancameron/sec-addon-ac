@@ -152,8 +152,8 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 	function new_column_info( $columns, $id ) {
 		switch ( $columns ) {
 			case 'itemtype':
-				$hb_deal_type = get_post_meta( $id, 'mw-deal-type', true );
-				echo $hb_deal_type;
+				$type = ( self::is_coupon( $id ) ) ? 'Coupon' : 'Offer' ;
+				echo $type;
 				break;
 
 			default:
