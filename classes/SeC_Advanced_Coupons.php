@@ -106,6 +106,7 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 
 	//save the entry when post is saved or updated
 	public static function mw_save_deal_option_metabox( $post_id ) {
+		self::unmake_offer_coupon( $post_id );
 		if ( isset( $_POST[self::OPTION_NAME] ) ) {
 			self::make_offer_coupon( $post_id );
 		}
@@ -196,6 +197,14 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 			$post_id = $post->ID;
 		}
 		wp_set_object_terms( $post_id, self::get_term_slug(), self::TAX );
+	}
+
+	public function unmake_offer_coupon( $post_id = 0 ) {
+		if ( !$post_id ) {
+			global $post;
+			$post_id = $post->ID;
+		}
+		wp_set_object_terms( $post_id, array(), self::TAX );
 	}
 
 	public static function get_term_slug() {
