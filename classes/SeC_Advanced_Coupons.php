@@ -184,7 +184,8 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 			global $post;
 			$post_id = $post->ID;
 		}
-		$term = array_pop( wp_get_object_terms( $post_id, self::TAX ) );
+		$terms = wp_get_object_terms( $post_id, self::TAX );
+		$term = array_pop( $terms );
 		if ( !is_object( $term ) ) {
 			return FALSE;
 		}
@@ -199,7 +200,7 @@ class SeC_Advanced_Coupons extends Group_Buying_Controller {
 		wp_set_object_terms( $post_id, self::get_term_slug(), self::TAX );
 	}
 
-	public function unmake_offer_coupon( $post_id = 0 ) {
+	public static function unmake_offer_coupon( $post_id = 0 ) {
 		if ( !$post_id ) {
 			global $post;
 			$post_id = $post->ID;
