@@ -30,6 +30,7 @@ class SeC_CouponWidget extends WP_Widget {
 		$coupon_query= null;
 		$args=array(
 			'post_type' => gb_get_deal_post_type(),
+			SeC_Advanced_Coupons::TAX => SeC_Advanced_Coupons::get_term_slug(),
 			'post_status' => 'publish',
 			'meta_query' => array(
 				array(
@@ -37,10 +38,7 @@ class SeC_CouponWidget extends WP_Widget {
 					'value' => array( 0, current_time( 'timestamp' ) ),
 					'compare' => 'NOT BETWEEN'
 				),
-				array(
-					'key' => 'mw-deal-type',
-					'value' => 'coupon',
-				) ),
+			),
 			'posts_per_page' => $deals,
 			'post__not_in' => array( $post_not_in )
 		);
